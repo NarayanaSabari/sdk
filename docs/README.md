@@ -10,8 +10,6 @@ docs/
 ├── index.rst              # Main documentation landing page
 ├── requirements.txt       # Documentation dependencies
 ├── Makefile              # Build automation (Linux/macOS)
-├── make.bat              # Build automation (Windows)
-├── build_docs_locally.sh # Helper script for local builds
 ├── source/
 │   ├── installation.rst
 │   ├── getting-started.rst
