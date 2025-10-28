@@ -162,12 +162,11 @@ class TrainerClient:
         """Get logs from a specific step of a TrainJob.
 
         You can watch for the logs in realtime as follows:
-        ```python
-        from kubeflow.trainer import TrainerClient
 
-        for logline in TrainerClient().get_job_logs(name="s8d44aa4fb6d", follow=True):
-            print(logline)
-        ```
+            from kubeflow.trainer import TrainerClient
+
+            for logline in TrainerClient().get_job_logs(name="s8d44aa4fb6d", follow=True):
+                print(logline)
 
         Args:
             name: Name of the TrainJob.
@@ -176,7 +175,6 @@ class TrainerClient:
 
         Returns:
             Iterator of log lines.
-
 
         Raises:
             TimeoutError: Timeout to get a TrainJob.
