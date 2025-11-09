@@ -12,4 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from kubeflow.trainer.constants.constants import *
+"""Container backend for local hyperparameter optimization."""
+
+from kubeflow.optimizer.backends.container.backend import ContainerBackend
+from kubeflow.optimizer.backends.container.types import ContainerBackendConfig
+
+__all__ = [
+    "ContainerBackend",
+    "ContainerBackendConfig",
+]

@@ -18,6 +18,9 @@ from kubeflow.common.types import KubernetesBackendConfig
 # Import the Kubeflow Optimizer client.
 from kubeflow.optimizer.api.optimizer_client import OptimizerClient
 
+# Import the Kubeflow Optimizer backend configurations.
+from kubeflow.optimizer.backends.container.types import ContainerBackendConfig
+
 # Import the Kubeflow Optimizer types.
 from kubeflow.optimizer.types.algorithm_types import GridSearch, RandomSearch
 from kubeflow.optimizer.types.optimization_types import (
@@ -32,6 +35,7 @@ from kubeflow.optimizer.types.search_types import Search
 from kubeflow.trainer.types.types import TrainJobTemplate
 
 __all__ = [
+    "ContainerBackendConfig",
     "GridSearch",
     "KubernetesBackendConfig",
     "Objective",

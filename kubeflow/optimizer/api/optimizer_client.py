@@ -14,9 +14,11 @@
 
 from collections.abc import Iterator
 import logging
-from typing import Any, Optional
+from typing import Any, Optional, Union
 
 from kubeflow.common.types import KubernetesBackendConfig
+from kubeflow.optimizer.backends.container.backend import ContainerBackend
+from kubeflow.optimizer.backends.container.types import ContainerBackendConfig
 from kubeflow.optimizer.backends.kubernetes.backend import KubernetesBackend
 from kubeflow.optimizer.constants import constants
 from kubeflow.optimizer.types.algorithm_types import BaseAlgorithm
@@ -34,17 +36,20 @@ logger = logging.getLogger(__name__)
 class OptimizerClient:
     def __init__(
         self,
-        backend_config: Optional[KubernetesBackendConfig] = None,
+        backend_config: Optional[Union[KubernetesBackendConfig, ContainerBackendConfig]] = None,
     ):
         """Initialize a Kubeflow Optimizer client.
 
         Args:
-            backend_config: Backend configuration. Either KubernetesBackendConfig or None to use
-                default config class. Defaults to KubernetesBackendConfig.
+            backend_config: Backend configuration. Either KubernetesBackendConfig,
+                ContainerBackendConfig, or None to use default KubernetesBackendConfig.
+                
+                - KubernetesBackendConfig: Run hyperparameter optimization on Kubernetes using Katib.
+                - ContainerBackendConfig: Run hyperparameter optimization locally using Docker/Podman
+                  containers without requiring a Kubernetes cluster.
 
         Raises:
             ValueError: Invalid backend configuration.
-
         """
         # Set the default backend config.
         if not backend_config:
@@ -52,6 +57,8 @@ class OptimizerClient:
 
         if isinstance(backend_config, KubernetesBackendConfig):
             self.backend = KubernetesBackend(backend_config)
+        elif isinstance(backend_config, ContainerBackendConfig):
+            self.backend = ContainerBackend(backend_config)
         else:
             raise ValueError(f"Invalid backend config '{backend_config}'")
 
